@@ -9,12 +9,12 @@
 
 | Serviço | Versão | Função |
 |--------|--------|--------|
-| **Elasticsearch** | `8.17.0` | Armazenamento e busca de dados |
-| **Kibana** | `8.17.0` | Interface de visualização e gestão |
-| **APM Server** | `8.17.0` | Coleta de traces e métricas de aplicações |
+| **Elasticsearch** | `8.18.8` | Armazenamento e busca de dados |
+| **Kibana** | `8.17.8` | Interface de visualização e gestão |
+| **APM Server** | `8.18.8` | Coleta de traces e métricas de aplicações |
 | **Elasticsearch Exporter** | `v1.8.0` | Exporta métricas do ES para Prometheus |
-| **Prometheus** | `v2.54.1` | Coleta e armazenamento de métricas |
-| **Grafana** | `v11.2.0` | Dashboard visual de métricas e traces |
+| **Prometheus** | `v2.53.0` | Coleta e armazenamento de métricas |
+| **Grafana** | `11.5.1` | Dashboard visual de métricas e traces |
 
 ---
 
@@ -54,11 +54,11 @@ chmod +x setup.sh
 | Serviço              | URL                     | Credenciais                                     |
 |----------------------|-------------------------|-------------------------------------------------|
 | **Elasticsearch**    | `http://localhost:9200` | `elastic` / senha do `.env` (`ELASTIC_PASSWORD`) |
-| **Kibana**           | `http://localhost:5601` | `kibana_system` / senha gerada (`KIBANA_SYSTEM_PASS`) |
+| **Kibana**           | `http://localhost:5601` | `elastic` / senha gerada (`ELASTIC_PASSWORD`) |
 | **Grafana**          | `http://localhost:3000` | `admin` / senha do `.env` (`GF_SECURITY_ADMIN_PASSWORD`) |
 | **APM Server**       | `http://localhost:8200` | Autenticação por token (veja abaixo)            |
 | **Prometheus**       | `http://localhost:9090` | Sem autenticação (local)                        |
-| **Elasticsearch Exporter** | `http://localhost:9114/metrics` | Autenticação via `ELASTIC_PASSWORD`      |
+| **Elasticsearch Exporter** | `http://localhost:9114/metrics` |
 
 > ✅ **As credenciais são salvas automaticamente no arquivo `.env` após a primeira execução.**
 
@@ -148,7 +148,7 @@ Script robusto que:
 
 ## 1. Kibana (`http://localhost:5601`)
 
-- Faça login com `kibana_system` + senha do `.env`
+- Faça login com `elastic` + senha do `.env`
 - Vá em **Observability > APM** para ver os traces enviados pelo script Python
 - Use **Discover** para visualizar logs (se estiver coletando)
 
