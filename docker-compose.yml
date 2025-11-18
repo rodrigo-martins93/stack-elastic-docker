@@ -1,0 +1,117 @@
+services:
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.18.8
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    networks:
+      - monitoring
+    volumes:
+      - es:/usr/share/elasticsearch/data
+
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.8
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_SYSTEM_PASS}
+      - SERVER_PUBLICBASEURL=http://localhost:5601
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - monitoring
+
+  # APM Server
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:8.18.8
+    container_name: apm-server
+    command: >
+      apm-server -e
+        -E output.elasticsearch.hosts=["http://elasticsearch:9200"]
+        -E output.elasticsearch.username=elastic
+        -E output.elasticsearch.password=${ELASTIC_PASSWORD}
+        -E apm-server.host=0.0.0.0:8200
+        -E apm-server.auth.secret_token=${APM_SECRET_TOKEN}
+        -E apm-server.metrics.enabled=true
+    ports:
+      - "8200:8200"
+    depends_on:
+      - elasticsearch
+    networks:
+      - monitoring
+
+  # Elasticsearch Exporter
+  es-exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:v1.8.0
+    container_name: elasticsearch_exporter
+    command:
+      - '--es.uri=http://elastic:${ELASTIC_PASSWORD}@elasticsearch:9200'
+      - '--es.all'
+      - '--es.indices'
+      - '--es.ssl-skip-verify'
+    ports:
+      - "9114:9114"
+    depends_on:
+      - elasticsearch
+    networks:
+      - monitoring
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - es-exporter
+      - apm-server
+    networks:
+      - monitoring
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:11.5.1
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
+    volumes:
+      - grafana:/var/lib/grafana
+
+volumes:
+  es:
+    name: elasticsearch
+  prometheus:
+    name: prometheus
+  grafana:
+    name: grafana
+
+networks:
+  monitoring:
+    driver: bridge
+    name: monitoring
