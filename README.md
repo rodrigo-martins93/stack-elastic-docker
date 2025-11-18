@@ -12,9 +12,9 @@
 | **Elasticsearch** | `8.17.0` | Armazenamento e busca de dados |
 | **Kibana** | `8.17.0` | Interface de visualização e gestão |
 | **APM Server** | `8.17.0` | Coleta de traces e métricas de aplicações |
-| **Elasticsearch Exporter** | `latest` | Exporta métricas do ES para Prometheus |
-| **Prometheus** | `latest` | Coleta e armazenamento de métricas |
-| **Grafana** | `latest` | Dashboard visual de métricas e traces |
+| **Elasticsearch Exporter** | `v1.8.0` | Exporta métricas do ES para Prometheus |
+| **Prometheus** | `v2.54.1` | Coleta e armazenamento de métricas |
+| **Grafana** | `v11.2.0` | Dashboard visual de métricas e traces |
 
 ---
 
