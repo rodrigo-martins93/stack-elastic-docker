@@ -20,8 +20,8 @@
 
 ## 📦 Pré-requisitos
 
-- [Docker](https://docs.docker.com/get-docker/) instalado
-- [Docker Compose](https://docs.docker.com/compose/install/) (v2+ recomendado)
+- Docker 
+- Docker Compose
 - Sistema operacional: **Ubuntu** (ou qualquer Linux/WSL2)
 
 ---
