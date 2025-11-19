@@ -89,8 +89,8 @@ for i in {1..25}; do
   sleep 2
 done
 
-# --- 4. KIBANA_SYSTEM_PASS: SEMPRE REGERAR ---
-echo "Regenerando senha para 'kibana_system'..."
+# --- 4. KIBANA_SYSTEM_PASS: SEMPRE GERAR ---
+echo "Gerando senha para 'kibana_system'..."
 PASS_LINE=$(docker exec elasticsearch bin/elasticsearch-reset-password -u kibana_system -b 2>/dev/null | grep 'New value')
 if [ -z "$PASS_LINE" ]; then
   echo " Falha ao gerar senha para kibana_system."
