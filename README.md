@@ -172,12 +172,6 @@ Script robusto que:
 - ✅ Use **Alertmanager** para notificações via email/Slack
 
 
-## 📝 Notas Finais
-
-- Este ambiente foi testado no **Ubuntu 22.04 LTS** com **Docker Engine 24.x**.
-- Todos os serviços rodam em containers isolados — sem instalação local de Java, Python, etc.
-- Baseado em versões estáveis da **Elastic Stack 8.17.0 (LTS)**.
-
 ---
 
 > 🇧🇷 *Desenvolvido por Rodrigo*  
