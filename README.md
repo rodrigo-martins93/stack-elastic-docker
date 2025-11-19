@@ -135,7 +135,7 @@ if __name__ == "__main__":
 ✅ Trace enviado com sucesso!
 ```
 
-## `setup.sh`
+## `start_monitoring.sh`
 
 Script robusto que:
 
