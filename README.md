@@ -172,10 +172,7 @@ Script robusto que:
 - ✅ Use **Alertmanager** para notificações via email/Slack
 
 
----
 
-> 🇧🇷 *Desenvolvido por Rodrigo*  
-> ✨ *"Monitorar é cuidar. O que não é medido, não é gerenciado."*
 
 
 
