@@ -38,8 +38,8 @@ cd elastic-monitoring-stack
 
 ### 2. Gere as senhas e inicie o ambiente
 ```bash
-chmod +x setup.sh
-./setup.sh
+chmod +x start_monitoring.sh
+./start_monitoring.sh
 ```
 
  O script setup.sh: 
