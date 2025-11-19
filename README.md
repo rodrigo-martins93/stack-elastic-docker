@@ -42,7 +42,7 @@ chmod +x start_monitoring.sh
 ./start_monitoring.sh
 ```
 
- O script setup.sh: 
+ O script start_monitoring.sh: 
 
 - Gera senhas seguras se não estiverem definidas no .env
 - Regenera a senha do usuário kibana_system (obrigatório no Elasticsearch 8+)
